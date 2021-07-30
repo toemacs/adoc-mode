@@ -175,6 +175,7 @@
 
 (require 'markup-faces) ; https://github.com/sensorflo/markup-faces
 (require 'cl-lib)
+(eval-when-compile (require 'subr-x))
 (require 'tempo)
 
 (defconst adoc-mode-version "0.6.6"
@@ -2699,7 +2700,7 @@ trailing delimiter ('== my title ==').
          ((looking-at (adoc-re-one-line-title level))
           (setq type 1)
           (setq text (match-string 2))
-          (setq sub-type (if (< 0 (length (match-string 3))) 2 1))
+          (setq sub-type (if (< 0 (length (string-trim-right (match-string 3)))) 2 1))
           (setq found t))
          ;; WARNING: if you decide to replace adoc-re-two-line-title with a
          ;; method ensuring the correct length of the underline, be aware that

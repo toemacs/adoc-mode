@@ -696,6 +696,14 @@ removed before TRANSFORM is evaluated.
 
 (ert-deftest adoctest-test-promote-title ()
   (adoctest-trans "= foo" "== foo" '(adoc-promote-title 1))
+  (adoctest-trans "= <foo>
+
+  bar"
+                  "== foo
+
+  bar"
+                  '(adoc-promote-title 1))
+  (adoctest-trans "= foo " "== foo" '(adoc-promote-title 1))
   (adoctest-trans "===== foo" "= foo" '(adoc-promote-title 1))
   (adoctest-trans "== foo" "==== foo" '(adoc-promote-title 2))
 
